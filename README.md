@@ -236,7 +236,7 @@ Complete!
 ---
 
 ## 📁 Source Code
-https://github.com/fscss-ttr/FSCSS@main/xf/styles/counterx.fscss
+https://github.com/fscss-ttr/FSCSS/blob/main/xf/styles/counterx.fscss
 ```scss
 /* name "counterx/fscss" use "counter\-init" */
 
