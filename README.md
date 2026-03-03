@@ -6,7 +6,7 @@ Counterx generates full @keyframes percentage steps (0% → 100%) using FSCSS ar
 
 ---
 
-### 📦 Installation
+### 📦 implementation 
 
 1. Include FSCSS or via CLI 
 
