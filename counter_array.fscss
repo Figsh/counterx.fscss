@@ -1,4 +1,4 @@
-/* ./counter-array.fscss */
+/* ./counter_array.fscss */
 
 @arr numlist[count(99)]
 @arr counter-before[ing...,ing...,ed] 
