@@ -65,7 +65,7 @@ With smooth step-based animation using steps(100).
 
 ---
 
-#### ⚙️ How It Works**
+#### ⚙️ How It Works
 
 **Counterx uses:**
 
