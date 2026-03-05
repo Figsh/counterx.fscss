@@ -1,17 +1,17 @@
 # counterx.fscss
 
-Simple FSCSS percentage counter animation plugin.
+*Simple FSCSS percentage counter animation plugin (v1.1.15+)*
 
-Counterx generates full @keyframes percentage steps (0% → 100%) using FSCSS arrays. It allows you to create animated text counters without JavaScript.
+Counterx generates full @keyframes percentage steps (0% → 100%) using FSCSS arrays and the new @define system. Create animated text counters without JavaScript.
 
 ---
 
-### 📦 implementation 
+# 📦 Installation
 
-1. Include FSCSS or via CLI 
+1. Include FSCSS (via CDN or CLI)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/fscss@1.1.14/exec.min.js" async></script>
+<script src="https://cdn.jsdelivr.net/npm/fscss@1.1.15/exec.min.js" async></script>
 ```
 
 2. Import Counterx
@@ -20,9 +20,9 @@ Counterx generates full @keyframes percentage steps (0% → 100%) using FSCSS ar
 @import(exec(_init counterx))
 ```
 
-Since Counterx is a .fscss file, you do NOT need to include the extension.
+Since Counterx is a .fscss file, you do not need to include the extension.
 
-Note: If a plugin uses another extension like .css or .xfscss, you must specify it:
+> Note: If a plugin uses another extension like .css or .xfscss, you must specify it:
 
 ```css
 @import(exec(_init myplugin/css))
@@ -33,7 +33,7 @@ Note: If a plugin uses another extension like .css or .xfscss, you must specify 
 ### 🚀 Basic Usage
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/fscss@1.1.14/exec.min.js" async></script>
+<script src="https://cdn.jsdelivr.net/npm/fscss@1.1.15/exec.min.js" async></script>
 
 <style>
 @import(exec(_init counterx))
@@ -44,20 +44,21 @@ h2:after {
 }
 
 @keyframes count {
-  counter-init
+  @counter-init()
 }
 </style>
 
 <h2>Process</h2>
 ```
 
-**This generates:**
+Output Generated:
 
 ```
 0%
 1%
 2%
 ...
+99%
 100%
 ```
 
@@ -65,43 +66,37 @@ With smooth step-based animation using steps(100).
 
 ---
 
-#### ⚙️ How It Works
+⚙️ How It Works
 
-**Counterx uses:**
+Counterx uses FSCSS arrays and the @define system (v1.1.15+):
 
 ```scss
-@arr numlist[count(99)]
+@arr numlist[count(99)]           /* Generates 1–99 */
+
+@define counter-init(start: ing..., process: ing..., end: ed) {
+  "
+  0% {
+    content: '@use(start)0%'
+  }
+  @arr.numlist[]% {
+    content: '@use(process)@arr.numlist[]%';
+  }
+  100% {
+    content: '@use(end)';
+  }
+  "
+}
 ```
 
-**And internally expands to:**
+### Array Structure:
 
-· 0%
-· 1–99%
-· 100%
-
-**Using special array helpers:**
-
-· array!.first → 0%
-· array[2] → 1–99%
-· array!.last → 100%
+· @arr.numlist → generates numbers 1–99 using count(99)
 
 ---
 
-**✏️ Customizing Text Output**
+### ✏️ Customizing Text Output
 
-Counterx uses an internal array:
-
-```scss
-@arr counter-before[ing...,ing...,ed]
-```
-
-**Index meaning:**
-
-· first → applied at 0%
-· second → applied at 1–99%
-· last → applied at 100%
-
-**Default output:**
+Default Output:
 
 ```
 ing...0%
@@ -111,38 +106,31 @@ ing...99%
 ed
 ```
 
----
-
-#### 🎯 Remove Prefix / Suffix
-
-If you want only pure numbers:
+Customize with Parameters:
 
 ```css
 @import(exec(_init counterx))
 
-/* Override the counter-before array */
-@arr counter-before[,,100%]
-
 h2:after {
   content: "...";
-  animation: count 10s steps(100) forwards;
+  animation: count 5s steps(100) forwards;
 }
 
 @keyframes count {
-  counter-init
+  @counter-init( Starting...,Loading...,Complete!)
 }
 ```
 
-**Now it becomes:**
+Output:
 
 ```
-0%
-1%
-2%
+Starting...0%
+Loading...1%
+Loading...2%
 ...
-100%
+Loading...99%
+Complete!
 ```
-
 ---
 
 ## 💡 Why Counterx?
@@ -151,9 +139,10 @@ Feature Benefit
 No JavaScript Pure CSS solution
 No manual keyframes Write 1 line, generate 100+
 Compile-time generation Zero runtime overhead
-CSS `steps()` compatible Smooth tick-by-tick animation
+CSS steps() compatible Smooth tick-by-tick animation
 Lightweight Minimal code footprint
-Fully customizable Arrays for complete control
+Parameter support Fully customizable via @define
+Plugin ecosystem Part of FSCSS plugin system
 
 ---
 
@@ -167,13 +156,13 @@ Using steps(100) makes the counter tick like a real progress indicator—one ste
 
 ---
 
-### 🌟 Complete Example
+🌟 Complete Example
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.14/exec.min.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.15/exec.min.js" async></script>
   <style>
   @import(exec(_init counterx))
   
@@ -190,90 +179,69 @@ Using steps(100) makes the counter tick like a real progress indicator—one ste
   }
   
   @keyframes count {
-    counter-init
+    @counter-init(⏳ Starting..., 📦 Loading..., ✅ Complete!)
   }
   </style>
 </head>
 <body>
-  <h2>Download</h2>
+  <h2>Download Progress </h2>
 </body>
 </html>
 ```
 
 ---
 
-## 🔧 Custom Counter Array
-
-Want different text? Override the counter-before array:
-
-```css
-@import(exec(_init counterx))
-
-/* Format: [0% text, 1-99% text, 100% text] */
-@arr counter-before[Starting...,Loading...,Complete!]
-
-h2:after {
-  content: "...";
-  animation: count 5s steps(100) forwards;
-}
-
-@keyframes count {
-  counter-init
-}
-```
-
-Output:
-
-```
-Starting...0%
-Loading...1%
-Loading...2%
-...
-Loading...99%
-Complete!
-```
-
----
-
 ## 📁 Source Code
-https://github.com/fscss-ttr/FSCSS/blob/main/xf/styles/counterx.fscss
+
+File: counterx.fscss 
+FSCSS: (v1.1.15+)
+
 ```scss
-/* name "counterx/fscss" use "counter\-init" */
+/* name "counterx/fscss" use "@counter\-init()" version 1.1.15+ */
+
+exec(_log, "counterx.fscss linked\nUse @counter\-init() inside @keyframes\nSupported version: 1.1.15+")
 
 @arr numlist[count(99)]
-@arr counter-before[ing...,ing...,ed] 
 
-str(counter-init, "
-    0%{
-      content: '@arr.counter-before!.first0%'
-    } 
-    @arr.numlist[]%{
-      content: '@arr.counter-before[2]@arr.numlist[]%';
-    } 
-    100%{
-      content: '@arr.counter-before!.last';
-    }"
-)
+@define counter-init(start: ing..., process: ing..., end: ed) {
+  "
+  0% {
+    content: '@use(start)0%'
+  }
+  @arr.numlist[]% {
+    content: '@use(process)@arr.numlist[]%';
+  }
+  100% {
+    content: '@use(end)';
+  }
+  "
+}
 ```
+
+Repository:
+https://github.com/fscss-ttr/FSCSS/blob/main/xf/styles/counterx.fscss
 
 ---
 
-🎨 Plugin Info
+## 🎨 Plugin Info
 
-- Name: counterx
-- Extension: .fscss (no need to specify when importing)
-- Directive: counter-init
-- ependencies: FSCSS v1.1.14+
+Property Value
+Name counterx
+Extension .fscss (no need to specify when importing)
+Directive @counter-init()
+Version 1.1.15+
+Dependencies FSCSS v1.1.15+
+Parameters start, process, end (all optional)
 
 ---
 
 ## 📋 Summary
 
-Counterx is part of the FSCSS plugin ecosystem. It transforms this:
+Counterx is part of the FSCSS plugin ecosystem. Using the new @define system (v1.1.15+), it transforms this:
 
 ```css
 @keyframes count {
-  counter-init
+  @counter-init(start: "Starting...", process: "Loading...", end: "Done!")
 }
 ```
 
@@ -283,11 +251,29 @@ Simple. Declarative. Generated. 🎯
 
 ---
 
-## 🔗 Related
+🔗 Related
 
-- fscss.devtem.org
-- More coming soon!
+- FSCSS Documentation: https://fscss.devtem.org
+- FSCSS @define Method: https://fscss.devtem.org/define 
+- FSCSS Arrays: https://fscss.devtem.org/arrays 
+- More Plugins Coming Soon!
 
 ---
 
-**Made with ❤️**
+## 📝 Changelog
+
+v1.1.15+ (Current)
+
+· Migrated to @define system
+· Added parameter support (start, process, end)
+· Improved flexibility and customization
+· Better error handling and logging
+
+v1.1.14 (Legacy)
+
+· Original array-based implementation
+· Fixed array indexing
+
+---
+
+Made with ❤️ by Figsh 
