@@ -276,4 +276,4 @@ v1.1.14 (Legacy)
 
 ---
 
-Made with ❤️ by Figsh 
+Made with ❤️
