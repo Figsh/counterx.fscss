@@ -1,0 +1,41 @@
+{
+  "name": "counterx",
+  "version": "1.0.0",
+  "description": "Animated number counter utility for FSCSS with customizable timing, formatting, and display styles.",
+  "extension": "fscss",
+  "fscss_version": "^1.1.15",
+  "blocked_methods": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Figsh/counterx.fscss"
+  },
+  "bugs": {
+    "url": "https://github.com/Figsh/counterx.fscss/issues"
+  },
+  "file": {
+    "usage": {
+      "directive": "counterx",
+      "helpers": [
+        "counter-init",
+      ]
+    },
+    "modules": [
+      "counterx.fscss"
+    ],
+    "remote": "/counterx.fscss"
+  },
+  "author": {
+    "name": "figsh"
+  },
+  "keywords": [
+    "fscss",
+    "css",
+    "counter",
+    "animation",
+    "number-counter",
+    "ui-component",
+    "library",
+    "plugin"
+  ],
+  "license": "MIT"
+}
