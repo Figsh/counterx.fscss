@@ -20,9 +20,10 @@
       ]
     },
     "modules": [
-      "counterx.fscss"
+      "./counterx.fscss", 
+      "./counter_array.fscss", 
     ],
-    "remote": "/counterx.fscss"
+    "remote": "./counterx.fscss"
   },
   "author": {
     "name": "figsh"
