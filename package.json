@@ -16,12 +16,12 @@
     "usage": {
       "directive": "counterx",
       "helpers": [
-        "counter-init",
+        "counter-init"
       ]
     },
     "modules": [
-      "./counterx.fscss", 
-      "./counter_array.fscss", 
+      "./counterx.fscss",
+      "./counter_array.fscss"
     ],
     "remote": "./counterx.fscss"
   },
