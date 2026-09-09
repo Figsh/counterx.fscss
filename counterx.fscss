@@ -1,10 +1,5 @@
-/* name "counterx/fscss" use "@counter\-init()" version 1.1.15+ */
 @import(exec(counter_array.fscss))
-
-exec(_log, "counterx.fscss linked\nUse @counter\-init() inside @keyframes\nSupported version: 1.1.15+")
-
-@define counter-init(start: ing..., process: ing..., end: ed) {
-  "
+@define counter-init(start: ing..., process: ing..., end: ed) {`
   0% {
     content: '@use(start)0%'
   }
@@ -14,5 +9,4 @@ exec(_log, "counterx.fscss linked\nUse @counter\-init() inside @keyframes\nSuppo
   100% {
     content: '@use(end)';
   }
-  "
-}
+`}
