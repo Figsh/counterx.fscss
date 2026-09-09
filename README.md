@@ -237,7 +237,7 @@ Parameters start, process, end (all optional)
 
 ## 📋 Summary
 
-Counterx is part of the FSCSS plugin ecosystem. Using the new @define system (v1.1.15+), it transforms this:
+Counterx is part of the FSCSS module ecosystem. Using the @define system (v1.1.15+), it transforms this:
 
 ```css
 @keyframes count {
@@ -256,7 +256,7 @@ Simple. Declarative. Generated. 🎯
 - FSCSS Documentation: https://fscss.devtem.org
 - FSCSS @define Method: https://fscss.devtem.org/define 
 - FSCSS Arrays: https://fscss.devtem.org/arrays 
-- More Plugins Coming Soon!
+- libraries & modules: https://fscss.devtem.org/libraries 
 
 ---
 
