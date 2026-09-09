@@ -36,7 +36,6 @@
     "number-counter",
     "ui-component",
     "library",
-    "plugin"
   ],
   "license": "MIT"
 }
