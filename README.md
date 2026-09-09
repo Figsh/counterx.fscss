@@ -22,15 +22,15 @@ Counterx generates full @keyframes percentage steps (0% → 100%) using FSCSS ar
 
 Since Counterx is a .fscss file, you do not need to include the extension.
 
-> Note: If a plugin uses another extension like .css or .xfscss, you must specify it:
+> Note: If a module uses another extension like .css or .xfscss, you must specify (e.g /css):
 
 ```css
-@import(exec(_init myplugin/css))
+@import(exec(_init module/css))
 ```
 
 ---
 
-### 🚀 Basic Usage
+### Basic Usage
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.15/exec.min.js" async></script>
