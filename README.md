@@ -11,7 +11,7 @@ Counterx generates full @keyframes percentage steps (0% → 100%) using FSCSS ar
 1. Include FSCSS (via CDN or CLI)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/fscss@1.1.15/exec.min.js" async></script>
+<script src="https://cdn.jsdelivr.net/npm/fscss@1.2.4/runtime.min.js" async></script>
 ```
 
 2. Import Counterx
@@ -33,7 +33,7 @@ Since Counterx is a .fscss file, you do not need to include the extension.
 ### Basic Usage
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/fscss@1.1.15/exec.min.js" async></script>
+<script src="https://cdn.jsdelivr.net/npm/fscss@1.2.4/runtime.min.js" async></script>
 
 <style>
 @import(exec(_init counterx))
@@ -162,7 +162,7 @@ Using steps(100) makes the counter tick like a real progress indicator—one ste
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/fscss@1.1.15/exec.min.js" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/fscss@1.2.4/runtime.min.js" async></script>
   <style>
   @import(exec(_init counterx))
   
@@ -195,16 +195,13 @@ Using steps(100) makes the counter tick like a real progress indicator—one ste
 
 File: counterx.fscss 
 FSCSS: (v1.1.15+)
+> Very minimal
 
-```scss
-/* name "counterx/fscss" use "@counter\-init()" version 1.1.15+ */
+```css
 
-exec(_log, "counterx.fscss linked\nUse @counter\-init() inside @keyframes\nSupported version: 1.1.15+")
+@arr numlist[count(99)]           /* Generates 1–99 */
 
-@arr numlist[count(99)]
-
-@define counter-init(start: ing..., process: ing..., end: ed) {
-  "
+@define counter-init(start: ing..., process: ing..., end: ed) {`
   0% {
     content: '@use(start)0%'
   }
@@ -214,16 +211,45 @@ exec(_log, "counterx.fscss linked\nUse @counter\-init() inside @keyframes\nSuppo
   100% {
     content: '@use(end)';
   }
-  "
-}
+ `}
+
 ```
 
+**Example usage**
+
+```css
+h2:after {
+  content: "...";
+  animation: count 10s steps(100) forwards;
+}
+
+@arr numlist[count(99, 1)]           /* Generates 1–99 */
+
+@define counter-init(start: ing..., process: ing..., end: ed) {`
+  0% {
+    content: '@use(start)0%'
+  }
+  @arr.numlist[]% {
+    content: '@use(process)@arr.numlist[]%';
+  }
+  100% {
+    content: '@use(end)';
+  }
+ `}
+ 
+ 
+
+@keyframes count {
+  @counter-init(Processing..., Processing..., Processed)
+}
+
+```
 Repository:
 https://github.com/fscss-ttr/FSCSS/blob/main/xf/styles/counterx.fscss
 
 ---
 
-## 🎨 Plugin Info
+## 🎨 module Info
 
 Property Value
 Name counterx
