@@ -2,7 +2,7 @@
 
 *Simple FSCSS percentage counter animation library (fscss v1.1.15+)*
 
-Counterx generates full @keyframes percentage steps (0% → 100%) using FSCSS arrays and the new @define system. Create animated text counters without JavaScript.
+Counterx generates full @keyframes percentage steps (0% → 100%) using FSCSS arrays and the @define system. Create animated text counters without JavaScript.
 
 ---
 
